@@ -17,21 +17,21 @@ do
      
      ROCORD_NAME="${instance}.pavithra.sbs"
 
-    aws route53 change-resource-record-sets \
-  --hosted-zone-id Z0034753Q3D37U6HFEYZ \
-  --change-batch "{
-    \"Comment\": \"Updating record set\",
-    \"Changes\": [{
-      \"Action\": \"UPSERT\",
-      \"ResourceRecordSet\": {
-        \"Name\": \"${RECORD_NAME}\",
-        \"Type\": \"A\",
-        \"TTL\": 300,
-        \"ResourceRecords\": [{
-          \"Value\": \"${IP}\"
-        }]
-      }
-    }]
-  }"
+    cat <<EOF > route53.json
+{
+  "Comment": "Updating record set",
+  "Changes": [{
+    "Action": "UPSERT",
+    "ResourceRecordSet": {
+      "Name": "${RECORD_NAME}",
+      "Type": "A",
+      "TTL": 300,
+      "ResourceRecords": [{
+        "Value": "${IP}"
+      }]
+    }
+  }]
+}
+EOF
 
 done
