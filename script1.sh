@@ -21,7 +21,7 @@ do
      
     echo "Updating Route 53 records"
 
-    ROCORD_NAME="${instance}.pavithra.sbs"
+    RECORD_NAME="${instance}.pavithra.sbs"
 
     cat <<EOF > route53.json
 {
