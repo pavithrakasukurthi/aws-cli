@@ -7,7 +7,7 @@ do
     echo "Creating $instance..."
     INSTANCE_ID=$(aws ec2 run-instances --image-id ami-0220d79f3f480ecf5 --instance-type t3.micro --security-group-ids sg-03b68898754661942 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${instance}}]" --query 'Instances[0].InstanceId' --output text)
     
-    sleep 20
+    aws ec2 wait instance-running --instance-ids $INSTANCE_ID
 
     if [ "$instance" == "frontend" ]; then
         echo "getting Public IP adress of $instance"
