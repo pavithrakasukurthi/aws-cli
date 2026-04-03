@@ -19,9 +19,9 @@ do
 
     #updating Route 53 records
      
-     echo "Updating Route 53 records"
+    echo "Updating Route 53 records"
 
-     ROCORD_NAME="${instance}.pavithra.sbs"
+    ROCORD_NAME="${instance}.pavithra.sbs"
 
     cat <<EOF > route53.json
 {
@@ -39,5 +39,9 @@ do
   }]
 }
 EOF
+
+aws route53 change-resource-record-sets \
+      --hosted-zone-id Z0034753Q3D37U6HFEYZ \
+      --change-batch file://route53.json
 
 done
