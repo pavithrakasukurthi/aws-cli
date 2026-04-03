@@ -10,13 +10,17 @@ do
     sleep 20
 
     if [ "$instance" == "frontend" ]; then
+        echo "getting Public IP adress of $instance"
         IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
     else
+        echo "getting Private IP adress of $instance"
         IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text)
     fi
 
     #updating Route 53 records
      
+     echo "Updating Route 53 records"
+
      ROCORD_NAME="${instance}.pavithra.sbs"
 
     cat <<EOF > route53.json
