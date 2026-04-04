@@ -21,7 +21,11 @@ do
      
     echo "Updating Route 53 records"
 
-    RECORD_NAME="${instance}.pavithra.sbs"
+    if [ "$instance" == "frontend" ]; then
+      RECORD_NAME="pavithra.sbs"
+    else
+      RECORD_NAME="${instance}.pavithra.sbs"
+    fi
 
     cat <<EOF > route53.json
 {
